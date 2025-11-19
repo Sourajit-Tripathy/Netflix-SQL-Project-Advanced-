@@ -1,0 +1,14 @@
+-- List of All Analysis Questions
+
+-- 1. Count the Number of Movies vs TV Shows
+-- 2. Find the Most Common Rating for Movies and TV Shows
+-- 3. List All Movies Released in a Specific Year (e.g., 2020)
+-- 4. Find the Top 5 Countries with the Most Content on Netflix
+-- 5. Identify the Longest Movie
+-- 6. Find Content Added in the Last 5 Years
+-- 7. Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+-- 8. List All TV Shows with More Than 5 Seasons
+-- 9. Count the Number of Content Items in Each Genre
+-- 10. Find each year and the average number of content releases in India on Netflix
+-- 11. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+-- 12. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
