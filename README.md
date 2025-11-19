@@ -2,86 +2,72 @@
 ![ logo](https://github.com/Sourajit-Tripathy/Netflix-SQL-Project-Advanced-/blob/main/logo.png)
 
 ## Objectives
-📌 Project Overview
 
-This project focuses on performing advanced SQL analysis on a Netflix dataset.
-It covers window functions, STRING_SPLIT, CTE pipelines, date parsing, ranking, text categorization, and data cleaning techniques, demonstrating strong analytical and SQL engineering skills.
+## 📌 **Project Overview**
+
+This project performs an end-to-end advanced SQL analysis on the Netflix dataset using **MS SQL Server**.  
+It demonstrates advanced querying techniques such as CTEs, window functions, multi-value field normalization, date parsing, and text classification to extract meaningful insights from semi-structured data.
+
+## ✅ **Key SQL Tasks Performed (with Explanation)**
+
+### **1️⃣ Content Analysis — Movies vs TV Shows**
+Used `GROUP BY` to compare the distribution of Movies and TV Shows.  
+**Insight:** Helps understand platform-level content strategy.
+
+
+### **2️⃣ Rating Dominance by Category (Window Functions)**
+Used **CTEs** + `RANK() OVER(PARTITION BY type ORDER BY count DESC)` to identify the most common rating for each content type.  
+**Skill:** Window functions for ranking and analytical insights.
+
+
+### **3️⃣ Normalizing Multi-Value Fields (STRING_SPLIT + CROSS APPLY)**
+Split comma-separated fields for **country, genre, cast**, then normalized them using `CROSS APPLY`.  
+**Skill:** Handling non-normalized, multi-valued columns.
+
+
+### **4️⃣ Identifying the Longest Movie (String Parsing)**
+Extracted numeric duration from strings like “120 min” using `LEFT`, `CHARINDEX`, and `CAST`.  
+**Skill:** String parsing + numeric extraction.
+
+
+### **5️⃣ Time-Based Analysis (Date Parsing & Filtering)**
+Used `PARSE()` and `DATEADD()` to find content added in the last 5 years.  
+**Skill:** Date cleaning, conversion, and temporal analysis.
+
+
+### **6️⃣ TV Shows Season Count Extraction**
+Filtered TV Shows having more than 5 seasons by parsing numeric values embedded in text.  
+**Skill:** Extracting numbers from irregular text fields.
+
+
+### **7️⃣ Actor & Director Frequency Insights**
+Used `STRING_SPLIT` on the cast field to identify top recurring actors, especially for India-produced content.  
+**Skill:** Contributor-level analytics from multi-value text.
+
+### **8️⃣ Genre Popularity Analysis**
+Normalized genres using `STRING_SPLIT` and calculated their frequency.  
+**Skill:** Understanding content category trends.
+
+
+### **9️⃣ Keyword-Based Text Classification**
+Built a rule-based classifier using `CASE` to label content as **Good** or **Bad** based on keywords like *kill* or *violence*.  
+**Skill:** Basic text classification using SQL logic.
+
+
+
+## 🎓 **Skills & Learning Outcomes**
+
+This project strengthened knowledge in:
+
+- Advanced SQL **string functions**  
+- **Window functions** (`RANK`, `OVER`)  
+- **CTEs** for structured query logic  
+- Multi-value handling with **STRING_SPLIT + CROSS APPLY**  
+- **Date parsing**, conversion & filtering  
+- Data cleaning & transformation  
+- Rule-based **text classification**  
+- Working with real-world messy datasets  
 
 
 
 
-## ✅ Key SQL Tasks Performed (with Explanation)
-
-1️⃣ Content Analysis: Movies vs TV Shows
-
-Used GROUP BY to count distribution across content types.
-
-Helps understand platform content strategy.
-
-2️⃣ Rating Dominance by Category (Window Function)
-
-Used CTE + RANK() OVER(PARTITION BY) to identify the most frequent rating for movies and TV shows.
-
-Demonstrates expertise in window functions.
-
-3️⃣ Extracting Multi-value Fields (STRING_SPLIT + CROSS APPLY)
-
-Split comma-separated values for country, genre, and cast.
-
-Used CROSS APPLY to normalize data for frequency analysis.
-
-Learned handling non-normalized datasets in SQL.
-
-4️⃣ Identifying Longest Movie (Data Extraction from String)
-
-Parsed duration using LEFT, CHARINDEX, and CAST.
-
-Shows string manipulation + numeric extraction ability.
-
-5️⃣ Time-Based Analysis (Date Functions)
-
-Parsed date using PARSE() and extracted content added in the last 5 years.
-
-Demonstrated date conversion, validation, and filtering skills.
-
-6️⃣ Season Count for TV Shows
-
-Extracted season count using string parsing and applied numeric filtering.
-
-Shows understanding of irregular numeric values inside text fields.
-
-7️⃣ Actor and Director Frequency Analysis
-
-Performed cast splitting and aggregated counts to find top actors in India-produced content.
-
-Shows ability to build insights from semi-structured text columns.
-
-8️⃣ Genre Popularity Breakdown
-
-Used STRING_SPLIT to extract all genres and calculate frequency.
-
-Supports content recommendation and trend analysis use cases.
-
-9️⃣ Text Classification (Keyword Flagging)
-
-Categorized descriptions as Good/Bad based on keywords like “kill” and “violence”.
-
-Demonstrates ability to build rule-based text classifiers using SQL.
-
-## 🎓 Skills & Learning Outcomes
-
-By completing this project you learned:
-
-How to perform advanced SQL string manipulation
-
-Use of window functions for ranking
-
-Applying CTEs for clean step-wise analysis
-
-Using STRING_SPLIT + CROSS APPLY for multi-value fields
-
-Date parsing and temporal analysis
-
-Dataset cleaning + transformation
-
-Rule-based text classification using SQL conditions
