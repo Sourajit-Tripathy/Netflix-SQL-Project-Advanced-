@@ -7,125 +7,81 @@
 This project focuses on performing advanced SQL analysis on a Netflix dataset.
 It covers window functions, STRING_SPLIT, CTE pipelines, date parsing, ranking, text categorization, and data cleaning techniques, demonstrating strong analytical and SQL engineering skills.
 
-##create database netflix
-use netflix
-select * from netflix_data
 
 
--- 1. Count the Number of Movies vs TV Shows
-select type,count(show_id) as total_shows from netflix_data
-group by type
-order by total_shows desc 
 
--- 2. Find the Most Common Rating for Movies and TV Shows
+## ✅ Key SQL Tasks Performed (with Explanation)
 
-with cte as (select type, rating, count(*) as total_count from netflix_data
-group by type,rating
-), 
-cte2 as(
-select type,rating,total_count, rank()over(partition by type order by total_count desc) as rank
-from cte)
+1️⃣ Content Analysis: Movies vs TV Shows
 
-select type,rating from cte2
-where rank = 1;
+Used GROUP BY to count distribution across content types.
 
--- 3. List All Movies Released in a Specific Year (e.g., 2020)
+Helps understand platform content strategy.
 
-select * 
-from netflix_data
-where release_year = 2020 and type ='movie'
+2️⃣ Rating Dominance by Category (Window Function)
 
--- 4. Find the Top 5 Countries with the Most Content on Netflix
+Used CTE + RANK() OVER(PARTITION BY) to identify the most frequent rating for movies and TV shows.
 
+Demonstrates expertise in window functions.
 
-SELECT TOP 5 country, COUNT(*) AS total_content
-FROM (
-    SELECT 
-        LTRIM(RTRIM(value)) AS country
-    FROM netflix_data
-    CROSS APPLY STRING_SPLIT(country, ',')
-) AS t1
-WHERE country IS NOT NULL
-GROUP BY country
-ORDER BY total_content DESC;
+3️⃣ Extracting Multi-value Fields (STRING_SPLIT + CROSS APPLY)
 
+Split comma-separated values for country, genre, and cast.
 
--- 5. Identify the Longest Movie
+Used CROSS APPLY to normalize data for frequency analysis.
 
-select * from netflix_data
+Learned handling non-normalized datasets in SQL.
 
-SELECT *
-FROM netflix_data
-WHERE type = 'Movie'
-ORDER BY 
-    CAST(
-        LEFT(duration, CHARINDEX(' ', duration + ' ') - 1)
-    AS INT) DESC;
+4️⃣ Identifying Longest Movie (Data Extraction from String)
 
--- 6. Find Content Added in the Last 5 Years
+Parsed duration using LEFT, CHARINDEX, and CAST.
 
-    SELECT *
-FROM netflix_data
-WHERE PARSE(date_added AS DATE USING 'en-US') 
-      >= DATEADD(YEAR, -5, GETDATE());
-   
-   -- 7.  Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+Shows string manipulation + numeric extraction ability.
 
-select * from 
-( select *,LTRIM(RTRIM(value)) as director_name from netflix_data CROSS APPLY string_split(country,','))
-as t where director = 'Rajiv Chilaka'
+5️⃣ Time-Based Analysis (Date Functions)
 
-select * from netflix_data where director like '%Rajiv Chilaka%'
+Parsed date using PARSE() and extracted content added in the last 5 years.
 
--- 8. List All TV Shows with More Than 5 Seasons
+Demonstrated date conversion, validation, and filtering skills.
 
-select type, title from netflix_data
-where type = 'TV Show' and cast(left(duration,charindex(' ' ,duration + ' ')-1) as int) >5
+6️⃣ Season Count for TV Shows
 
--- 9. Count the Number of Content Items in Each Genre
-select* from netflix_data
+Extracted season count using string parsing and applied numeric filtering.
 
-select LTRIM(rtrim(value)) as genre, 
-count(*) as total_count from netflix_data 
-cross apply string_split(listed_in, ',')
-group by value 
+Shows understanding of irregular numeric values inside text fields.
 
-select(value) as genre from netflix_data cross apply string_split(listed_in, ',')
-group by value
+7️⃣ Actor and Director Frequency Analysis
 
+Performed cast splitting and aggregated counts to find top actors in India-produced content.
 
--- 10.Find each year and the average numbers of content release in India on netflix.
+Shows ability to build insights from semi-structured text columns.
 
-select TOP 5  country,
-    release_year,
-    COUNT(show_id) AS total_release,
-    ROUND(count(show_id)/(select count(show_id) from netflix_data where country = 'India')*100,2)
-    AS avg_release
-FROM netflix_data
-WHERE country = 'India'
-GROUP BY country, release_year
-ORDER BY avg_release DESC
+8️⃣ Genre Popularity Breakdown
 
--- 11. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+Used STRING_SPLIT to extract all genres and calculate frequency.
 
-select top 5 (value) as casts,count(*) as total from netflix_data cross apply string_split( cast, ',') 
-where country = 'India'
-group by value
-order by total desc
+Supports content recommendation and trend analysis use cases.
 
--- 12. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
-WITH cte  AS (
-    SELECT 
-        CASE 
-            WHEN description LIKE '%kill%' THEN 'Bad'
-            WHEN description LIKE '%violence%' THEN 'Bad'
-            ELSE 'Good'
-        END AS category
-    FROM netflix_data
-)
+9️⃣ Text Classification (Keyword Flagging)
 
-SELECT 
-    category,
-    COUNT(*) AS total
-FROM cte
-GROUP BY category;
+Categorized descriptions as Good/Bad based on keywords like “kill” and “violence”.
+
+Demonstrates ability to build rule-based text classifiers using SQL.
+
+## 🎓 Skills & Learning Outcomes
+
+By completing this project you learned:
+
+How to perform advanced SQL string manipulation
+
+Use of window functions for ranking
+
+Applying CTEs for clean step-wise analysis
+
+Using STRING_SPLIT + CROSS APPLY for multi-value fields
+
+Date parsing and temporal analysis
+
+Dataset cleaning + transformation
+
+Rule-based text classification using SQL conditions
