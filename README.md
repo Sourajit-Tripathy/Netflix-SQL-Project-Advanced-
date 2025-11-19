@@ -1,1 +1,2 @@
-# Netflix-SQL-Project-Advanced-
+                             # Netflix-SQL-Project-Advanced
+[image logo]()
